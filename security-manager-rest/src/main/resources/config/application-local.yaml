@@ -1,0 +1,48 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /security-manager-api
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=test
+    username: postgres
+    password: adriana
+  application:
+    name: SECURITY-MANAGER-API
+
+  spring:
+    zipkin:
+      enabled: false
+
+
+  data:
+    web: # DATA WEB (SpringDataWebProperties)
+      pageable:
+        default-page-size: 20         # Default page size.
+        max-page-size: 2000           # Maximum page size to be accepted.
+        one-indexed-parameters: false # Whether to expose and assume 1-based page number indexes.
+        page-parameter: page          # Page index parameter name.
+        prefix:                       # General prefix to be prepended to the page number and page size parameters.
+        qualifier-delimiter: _        # Delimiter to be used between the qualifier and the actual page number and size properties.
+        size-parameter: size          # Page size parameter name.
+        sort-parameter: sort          # Sort parameter name.
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+jwt:
+  header: X-Auth
+  secret: 2be78f5834a02f41cafb28abe017eb247fa999a3286cb8786277a5ea6fd9fe0910a684bff2e5111e08a7c9841fbde2e61d070dbbe21965beb3e4124597db9380 #gedocc-secret-key
+  expiration: 3600
+
+
+ms.sipad:
+  port: 8089
+  context-path: /ms-sipad-api
+  base.url: localhost:${ms.sipad.port}${ms.sipad.context-path}
+  user-fiscalcode: /user/find
+  employee-fiscalcode: /user/findByFiscalCode
